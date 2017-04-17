@@ -11,3 +11,4 @@ grid.SetObject(new Point(0,0,0), myObject);
 ```
 ## Problems
 * Default value for a `Grid.Dimension.CellDistance` is 0, causing a divide by 0 error, if doing a 1 or 2 dimensional grid, set the appropriate distance to 1.
+* There's no editor scripts for adjusting the grid dimensions in a nice editor-y way, and no way to attach objects to a grid non-dynamically.
