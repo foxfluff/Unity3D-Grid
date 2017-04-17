@@ -4,7 +4,8 @@ using UnityEngine;
 namespace foxfluff.GridSystem
 {
 	/// <summary>
-	/// Grid will 
+	/// Grid will create a uniform distribution of GameObjects that allow easy use of attaching
+	/// other objects, making things like tile based placement much easier
 	/// </summary>
 	public class Grid : MonoBehaviour, IGrid
 	{
@@ -23,12 +24,22 @@ namespace foxfluff.GridSystem
 			return grid[coordinate.X, coordinate.Y, coordinate.Z].Entry;
 		}
 
+		/// <summary>
+		/// Removes the GameObject on the grid.
+		/// </summary>
+		/// <param name="coordinate">The location of the object that needs to be removed.</param>
 		public void RemoveObject(Point coordinate)
 		{
+			#warning This doesn't destroy the wrapper object.
 			Destroy(grid[coordinate.X, coordinate.Y, coordinate.Z].Entry);
 			grid[coordinate.X, coordinate.Y, coordinate.Z] = null;
 		}
 
+		/// <summary>
+		/// Assign an object to a coordinate point on the grid.
+		/// </summary>
+		/// <param name="coordinate">The location on the grid where the object should be placed.</param>
+		/// <param name="gObject">The GameObject being added to the grid.</param>
 		public void SetObject(Point coordinate, GameObject gObject)
 		{
 			#warning Need to change transform on new objects to be placed properly
@@ -45,6 +56,11 @@ namespace foxfluff.GridSystem
 			grid = new GridEntry[length.CellCount, width.CellCount, height.CellCount];
 		}
 
+		/// <summary>
+		/// Calculate the localPosition for a given Point
+		/// </summary>
+		/// <param name="coordinate">The location to calculate the position for.</param>
+		/// <returns></returns>
 		private Vector3 calcPosition(Point coordinate)
 		{
 			return new Vector3(
